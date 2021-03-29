@@ -66,9 +66,9 @@ int main(int argc, char **argv)
     int n_read, i, exec_argc, parser_state, run_in_background;
     /* buffer: The Shell's input buffer. */
     char buffer[SHELL_BUFFER_SIZE];
-    /* exec_argv: Arguments passed to exec call including NULL terminator. */                                                                                                                                                                                                                                            /
-        char *exec_argv[SHELL_MAX_ARGS + 1];
-        /*TO-DO new variables for P5.2, P5.3, P5.6*/
+    /* exec_argv: Arguments passed to exec call including NULL terminator. */
+    char *exec_argv[SHELL_MAX_ARGS + 1];
+    /*TO-DO new variables for P5.2, P5.3, P5.6*/
 
     int counter = 1;
     char cmdCount[9];
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
             if (!isspace(buffer[i]))
             {
                 if (parser_state == STATE_SPACE)
-                exec_argv[exec_argc++] = &buffer[i];
+                    exec_argv[exec_argc++] = &buffer[i];
                 parser_state = STATE_NON_SPACE;
             }
             else
@@ -166,7 +166,7 @@ int main(int argc, char **argv)
                         /* Alternative: try chdir inside a forked child: if(fork                                                                                                                                                                                                                                             () == 0) { */
             if (chdir(exec_argv[1]))
                 /* Error: change directory failed */
-                fprintf(stderr, "cd: failed to chdir %s\n", exec _argv[1]);
+                fprintf(stderr, "cd: failed to chdir %s\n", exec_argv[1]);
             /* End alternative: exit(EXIT_SUCCESS);} */
         }
         else
@@ -199,7 +199,7 @@ int main(int argc, char **argv)
                 }
                 else
                 {
-                    return imthechild(exec_argv[0], &exec_ar gv[0]);
+                    return imthechild(exec_argv[0], &exec_argv[0]);
                 }
 
                 return imthechild(exec_argv[0], &exec_argv[0]);
