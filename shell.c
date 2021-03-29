@@ -122,8 +122,8 @@ int main(int argc, char **argv)
             strcpy(lastcmd[counter - 1], buffer);
         }
         parser_state = STATE_SPACE;
-        for (exec_argc = 0, i = 0;)
-             (buffer[i] != '\n') && (exec_argc < SHELL_MAX_ARGS); i + +)
+        for (exec_argc = 0, i = 0;
+             (buffer[i] != '\n') && (exec_argc < SHELL_MAX_ARGS); i++)
         {
 
             if (!isspace(buffer[i]))
