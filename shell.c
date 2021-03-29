@@ -114,7 +114,7 @@ int main(int argc, char **argv)
                 buffer[n_read - run_in_background - 1] = '\n';
 
                 // TO-DO P5.3
-                if (*buffer[0] == '!' && counter < 10)
+                if (*buffer == '!' && counter < 10)
                 {
                         buffer[0] = ' ';
                         int index = atoi(buffer);
