@@ -54,7 +54,7 @@ void imtheparent(pid_t child_pid, int run_in_background)
 		        child_pid, child_error_code);
 	}
 	else
-		counter++;
+		counter = counter + 1;
 }
 
 /* MAIN PROCEDURE SECTION */
@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 	/* exec_argv: Arguments passed to exec call including NULL terminator. */
 	char *exec_argv[SHELL_MAX_ARGS + 1];
 	// TO-DO new variables for P5.2, P5.3, P5.6
-	int counter = 1;
+	counter = 1;
 
 	/* Entrypoint for the testrunner program */
 	if (argc > 1 && !strcmp(argv[1], "-test")) {
