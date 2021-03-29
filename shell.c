@@ -87,7 +87,7 @@ int main(int argc, char **argv)
         //keep track of increment variable
         int counter = 1;
 
-        char comms[14][50];
+        char control[20][20];
 
         /* Entrypoint for the testrunner program */
         if (argc > 1 && !strcmp(argv[1], "-test"))
@@ -114,14 +114,14 @@ int main(int argc, char **argv)
                 buffer[n_read - run_in_background - 1] = '\n';
 
                 // TO-DO P5.3
-                if (*buffer == '!' && counter < 10)
+                if (*buffer == '!' && counter < 21)
                 {
                         buffer[0] = ' ';
                         int index = atoi(buffer);
 
                         if (index < counter)
                         {
-                                strncpy(buffer, comms[index], 30);
+                                strncpy(buffer, control[index], 30);
                                 strcat(buffer, "\n");
                         }
                         else
@@ -133,7 +133,7 @@ int main(int argc, char **argv)
                 /* Parse the arguments: the first argument is the file or command *
 		 * we want to run. 
 		 */
-                strcpy(comms[counter], buffer);
+                strcpy(control[counter], buffer);
 
                 parser_state = STATE_SPACE;
 
