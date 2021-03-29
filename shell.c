@@ -66,7 +66,7 @@ int main(int argc, char **argv)
     int n_read, i, exec_argc, parser_state, run_in_background;
     /* buffer: The Shell's input buffer. */
     char buffer[SHELL_BUFFER_SIZE];
-    /* exec_argv: Arguments passed to exec call including NULL terminator. *                                                                                                                                                                                                                                             /
+    /* exec_argv: Arguments passed to exec call including NULL terminator. */                                                                                                                                                                                                                                            /
         char *exec_argv[SHELL_MAX_ARGS + 1];
         /*TO-DO new variables for P5.2, P5.3, P5.6*/
 
@@ -129,7 +129,7 @@ int main(int argc, char **argv)
             if (!isspace(buffer[i]))
             {
                 if (parser_state == STATE_SPACE)
-                    exec_argv[exec_argc++] = &buffer[i];
+                exec_argv[exec_argc++] = &buffer[i];
                 parser_state = STATE_NON_SPACE;
             }
             else
