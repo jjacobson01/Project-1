@@ -20,9 +20,9 @@ enum
 {
         STATE_SPACE,
         STATE_NON_SPACE
-}; /* Parser states */
+}; 
 
-static int length = 0;
+int num = 0;
 
 int imthechild(const char *path_to_exec, char *const args[])
 {
@@ -202,12 +202,11 @@ int main(int argc, char **argv)
                                 {
 
                                         exec_argv[0] = "./a.out";
-                                        fprintf(stdout, "SUB: %s ; Deep%d\n", exec_argv[0], length);
+                                        fprintf(stderr, "Too deep!\n", exec_argv[0], num);
                                         return imthechild(exec_argv[0], &exec_argv[0]);
                                 }
                                 else
                                 {
-                                        fprintf(stdout, "TEST-FAILED");
                                         return imthechild(exec_argv[0], &exec_argv[0]);
 
                                         /* Exit from main. */
