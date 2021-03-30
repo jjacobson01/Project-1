@@ -54,17 +54,31 @@ STEP 4:  Questions
 
   1. Why is it necessary to implement a change directory 'cd' command in
      the shell?  Could it be implemented by an external program instead?
+         Change directory is a command used to maneuver between your directories in your shell.
+         Other programs have a built in version of cd, but cd itself can't be an seperate program
+         because when the system call, fork(), was created it caused the only working cd program to 
+         no longer function properly.
 
   2. Explain how our sample shell implements the change directory command.
+         This shell checks and compares the  two arguments/strings to see if they are the same/different.
+         One of the if statements compares the first string/argument with the string 'cd'.
+         If successful it will change directories.
+
 
   3. What would happen if this program did not use the fork function, but
      just used execv directly?  (Try it!)
 
      Try temporarily changing the code 'pid_from_fork = fork();'
      to 'pid_from_fork = 0;'
-
+         It looks like if fork wasn't used it would swap the current program in the process
+         with a new program.
   4. Explain what the return value of fork() means and how this program
      uses it.
+         the system call, fork(), returns 3 values, a negative value, positive value, or 0.
+         If it's a negative value then creating the child process failed. if it's a positive
+         value then a child process was created and returned the PID of the new child process
+         to the parent process.
+         If it returns a 0 then it is instead returned to the child process.
 
   5. What would happen if fork() were called prior to chdir(), and chdir()
      invoked within the forked child process?  (Try it!)
@@ -77,15 +91,24 @@ STEP 4:  Questions
              fprintf(stderr, "cd: failed to chdir %s\n", exec_argv[1]);
          exit(EXIT_SUCCESS);
      }
+         If called prior to chdir() then a new child process will be created and then the
+         new child process will call chdir(), if it fails then it will provide the error,
+         if it is successful then only the child process will change the directory.
 
   6. Can you run multiple versions of ./b.sh in the background?
      What happens to their output?
+         You can run multiple versions and the output should display as it finishes.
 
   7. Can you execute a second instance of our shell from within our shell
      program (use './shell')?  Which shell receives your input?
+         You can create a shell within a shell(shellception). the child shell will receive
+         the input and any changes and modifications does in the second instance of our 
+         shell will not effect anything in the parent shell.
 
   8. What happens if you type CTRL-C while the countdown script ./b.sh is
      running?  What if ./b.sh is running in the background?
+         CTRL-C will stop the process that is currently running. if ./b.sh is running then 
+         a new process should continue after the prior process has stopped.
 
   9. Can a shell kill itself?  Can a shell within a shell kill the parent
      shell?
@@ -94,6 +117,9 @@ STEP 4:  Questions
      ./shell
      /bin/kill -s KILL NNN      (Where NNN is the the parent's PID.)
 
+         Yes the child shell can kill the parent shell if parent PID is provided as the PID
+         is unique to each shell.
+
   10. What happens to background processes when you exit from the shell?
       Do they continue to run?  Can you see them with the 'ps' command?
 
@@ -101,6 +127,9 @@ STEP 4:  Questions
       ./b.sh&
       exit
       ps
+
+      Background processes should still continue even after exiting the shell. Using any
+      version of the ps command will show the existing background processes.
 
 
 STEP 5:  Modify the MP

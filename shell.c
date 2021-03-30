@@ -20,21 +20,22 @@ enum
 {
         STATE_SPACE,
         STATE_NON_SPACE
-}; 
+};
 
 int num = 0;
 
 int imthechild(const char *path_to_exec, char *const args[])
 {
+        char *cPath[20];
         // TO-DO P5.1
         //can use 'ls' instead of '/bin/ls'
         if ((execv(path_to_exec, args) ? -1 : 0) == -1)
         {
-                char *diffPath[50];
-                strcpy(diffPath, "/bin/");
-                strcat(diffPath, path_to_exec);
+                
+                strcpy(cPath, "/bin/");
+                strcat(cPath, path_to_exec);
 
-                return printf("With path: %d", execv(diffPath, args) ? -1 : 0);
+                return printf("path: %d", execv(cPath, args) ? -1 : 0);
         }
         else
         {
@@ -83,11 +84,10 @@ int main(int argc, char **argv)
         /* exec_argv: Arguments passed to exec call including NULL terminator. */
         char *exec_argv[SHELL_MAX_ARGS + 1];
         // TO-DO new variables for P5.2, P5.3, P5.6
+        char control[20][20];
 
         //keep track of increment variable
         int counter = 1;
-
-        char control[20][20];
 
         /* Entrypoint for the testrunner program */
         if (argc > 1 && !strcmp(argv[1], "-test"))
@@ -208,7 +208,6 @@ int main(int argc, char **argv)
                                 else
                                 {
                                         return imthechild(exec_argv[0], &exec_argv[0]);
-
                                         /* Exit from main. */
                                 }
                         }
