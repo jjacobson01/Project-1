@@ -28,6 +28,7 @@ int imthechild(const char *path_to_exec, char *const args[])
 {
         char *cPath[20];
         // TO-DO P5.1
+        //can use 'ls' instead of '/bin/ls'
         if ((execv(path_to_exec, args) ? -1 : 0) == -1)
         {
 
@@ -83,7 +84,7 @@ int main(int argc, char **argv)
         /* exec_argv: Arguments passed to exec call including NULL terminator. */
         char *exec_argv[SHELL_MAX_ARGS + 1];
         // TO-DO new variables for P5.2, P5.3, P5.6
-        char control[9];
+        char control[20][20];
 
         //keep track of increment variable
         int counter = 1;
@@ -113,14 +114,14 @@ int main(int argc, char **argv)
                 buffer[n_read - run_in_background - 1] = '\n';
 
                 // TO-DO P5.3
-                if (*buffer == '!' && counter < 10)
+                if (*buffer == '!' && counter < 21)
                 {
                         buffer[0] = ' ';
                         int index = atoi(buffer);
 
                         if (index < counter)
                         {
-                                strcpy(buffer, control[index]);
+                                strncpy(buffer, control[index], 30);
                                 strcat(buffer, "\n");
                         }
                         else
@@ -213,7 +214,6 @@ int main(int argc, char **argv)
                                         return imthechild(exec_argv[0], &exec_argv[0]);
                                         /* Exit from main. */
                                 }
-                                
                         }
                         else
                         {
