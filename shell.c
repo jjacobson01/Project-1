@@ -1,3 +1,7 @@
+//Name: Jonathan Jacobson
+//SID: 20179775
+//Partner name: Jose Aguilar
+
 /* SMP1: Simple Shell */
 
 /* LIBRARY SECTION */
