@@ -28,10 +28,9 @@ int imthechild(const char *path_to_exec, char *const args[])
 {
         char *cPath[20];
         // TO-DO P5.1
-        //can use 'ls' instead of '/bin/ls'
         if ((execv(path_to_exec, args) ? -1 : 0) == -1)
         {
-                
+
                 strcpy(cPath, "/bin/");
                 strcat(cPath, path_to_exec);
 
@@ -84,7 +83,7 @@ int main(int argc, char **argv)
         /* exec_argv: Arguments passed to exec call including NULL terminator. */
         char *exec_argv[SHELL_MAX_ARGS + 1];
         // TO-DO new variables for P5.2, P5.3, P5.6
-        char control[20][20];
+        char control[9];
 
         //keep track of increment variable
         int counter = 1;
@@ -114,14 +113,14 @@ int main(int argc, char **argv)
                 buffer[n_read - run_in_background - 1] = '\n';
 
                 // TO-DO P5.3
-                if (*buffer == '!' && counter < 21)
+                if (*buffer == '!' && counter < 10)
                 {
                         buffer[0] = ' ';
                         int index = atoi(buffer);
 
                         if (index < counter)
                         {
-                                strncpy(buffer, control[index], 30);
+                                strcpy(buffer, control[index]);
                                 strcat(buffer, "\n");
                         }
                         else
@@ -200,16 +199,21 @@ int main(int argc, char **argv)
                                 // TO-DO P5.6
                                 if (!strcmp(exec_argv[0], "sub"))
                                 {
-
-                                        exec_argv[0] = "./a.out";
-                                        fprintf(stderr, "Too deep!\n", exec_argv[0], num);
-                                        return imthechild(exec_argv[0], &exec_argv[0]);
+                                        counter = 1;
+                                        num++;
+                                        shell_pid = getpid();
+                                        if (num >= 3)
+                                        {
+                                                fprintf(stderr, "Too deep!\n");
+                                                return 0;
+                                        }
                                 }
                                 else
                                 {
                                         return imthechild(exec_argv[0], &exec_argv[0]);
                                         /* Exit from main. */
                                 }
+                                
                         }
                         else
                         {
